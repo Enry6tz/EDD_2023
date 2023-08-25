@@ -9,7 +9,4 @@ public interface Conjunto<E> {
 	public boolean pertenece(E elem);
 	Conjunto<E> intersección(Conjunto<E> otroConjunto);
 	
-	//ejemplo en clase 24/8
-	/*
-	public void add(E elementos);*/
 }
