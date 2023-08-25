@@ -1,4 +1,3 @@
-package Ejercicio1;
 
 public interface Conjunto<E> {
 	public int size(); 

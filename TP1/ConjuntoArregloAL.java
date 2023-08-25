@@ -1,4 +1,4 @@
-package Ejercicio1;
+
 import java.util.ArrayList;
 //ConjuntoArreglo<E> con esto empezamos a usar la genericidad parametrica.
 //EXPLICACION CLASE 24/8
