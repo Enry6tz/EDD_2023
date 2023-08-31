@@ -1,42 +1,3 @@
-# EDD
-
-* martes (aula 14) y jueves (aula 12) 16 a 20hs 
-
-```java
-System.out.println("Bienvenidos a Estructuras de Datos")
-```
-
-> • Estructura de datos = Manera sistemática de
-organizar y acceder datos.
-
->• Algoritmo = Procedimiento paso a paso para
-realizar una tarea en una cantidad finita de
-tiempo
-
-## Principios de diseño orientado a objetos
-
-abstraccion | Encapsulamiento | Modularidad
------------- | ------------- | -------------
-Ocultar detalles irrelevantes para aumentar entendimiento y claridad. | Los componentes de software no deben revelar detalles internos de implementación. | Principio organizacional que dice que los componentes de software se deben separar en unidades funcionales. 
- 
-## Factores de calidad
-
-Correctitud | Robustez | Extensibilidad
------------- | ------------- | -------------
-El programa respeta la especificación (para una entrada dada produce la salida esperada). | El programa es capaz de manejar entradas no contempladas por la especificación. Ej.: Recibe un string cuando espera un entero. | Capacidad de agregarle funcionalidad al software
-
-## Factores de calidad
-
-Portabilidad | Reusabilidad | Eficiencia | Facilidad de uso
------------- | ------------- | ------------- | -------------
-Habilidad del soft de correr con mínimo cambio en otro hard o sistema operativo.| Capacidad de usar el código en la construcción de otros programas. | : Capacidad del soft de requerir pocos recursos de cómputo (tiempo de CPU y memoria).|Capacidad del soft para ser usado por usuarios con distinta habilidad.
-
-### Robustez: Excepciones
-* Las excepciones son eventos inesperados que ocurren durante la ejecución de un programa.
-* Puede ser el resultado de una condición de error o una entrada incorrecta.
-* En POO las excepciones son objetos “lanzados” por un código que detecta una condición inesperada.
-* La excepción es “capturada” por otro código que repara la situación (o el programa termina con error en ejecución).
-
 # Tema 1: Interfaces y Genericidad parametrica
 
 
@@ -88,6 +49,35 @@ Habilidad del soft de correr con mínimo cambio en otro hard o sistema operativo
                 ├── MiInterfaz.java
                 ├── MiClase.java
                 └── Principal.java
+
+
+*  **Obs importante:** cuando accedes a través de la variable de tipo interfaz, solo podrás acceder a los métodos definidos en la interfaz.
+
+```java
+public interface MiInterfaz {
+    void metodoInterfaz();
+}
+
+public class MiClase implements MiInterfaz {
+    public void metodoInterfaz() {
+        System.out.println("Método de la interfaz implementado");
+    }
+    
+    public void metodoClase() {
+        System.out.println("Método de la clase");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        MiInterfaz miVariable = new MiClase();
+        
+        miVariable.metodoInterfaz(); // Método de la interfaz implementado
+        //miVariable.metodoClase(); // Esto no compilará, ya que el método no está en la interfaz
+    }
+}
+```
+>En este ejemplo, la clase `MiClase` implementa la interfaz `MiInterfaz` y proporciona su propia implementación del método `metodoClase()`. En el método `main()`, puedes ver que puedes acceder al método `metodoInterfaz()` a través de la variable `miVariable`, que es de **tipo `MiInterfaz`**. Sin embargo, si intentas acceder al método `metodoClase()`, obtendrás un error de compilación, **ya que ese método no está declarado en la interfaz**.
 
 ## Genericidad Parametrica
 
@@ -247,35 +237,293 @@ arreglo de objetos con genericidad de herencia.
 ## recursividad: recorrido de arreglos
 
 * **CR:** e pertenece a `A` si `e` es igual al ultimo elemento de `A` o si `e` pertenece a `A'`.
-  * donde `A` es `A` sin el ultimo elemento.
+  * donde `A'` es `A` sin el ultimo elemento.
 
-* **CB:** si `A` no tiene elementos entonces `e` no pertenece a `A`
+* **CB:** si `A'` no tiene elementos entonces `e` no pertenece a `A`
 
 ```java
-public boolean pertenece(E e){
-    return perteneceRec(e, A.length);
+public boolean perteneceRecursivo(E e){
+   return perteneceRec(e, elements.length);
 }
 //metodo privado perteneceRec(e, A.length)
-
 private boolean perteneceRec(E e, int n){
     boolean res ;
     if(n == 0){
-        res= false;
+      res= false;
     }else{
-        res = pertenece(A[n-1].equals(e) ||pertenece (e, n-1))
+        res = elements[n-1].equals(e) ||perteneceRec(e, n-1);
     }
     return res;
 }
 ```
 
-# try-catch con java
+## try catch en java 
 
-```java 
+algunos de los tipos de excepciones más comunes en Java:
 
-try { …. // codigo 
-} catch( Exception e ) {
-…
-} catch( IOException e ) { // Código inalcanzable ya que esta
-// excepción es capturada siempre por el bloque catch anterior.
-…}
+1. NullPointerException (NullPointerException): Ocurre cuando intentas acceder a un objeto o método en un objeto que es null.
+
+2. ArithmeticException (ArithmeticException): Se lanza cuando ocurre un error en una operación aritmética, como la división entre cero.
+
+3. ArrayIndexOutOfBoundsException (ArrayIndexOutOfBoundsException): Se produce cuando intentas acceder a un índice fuera del rango válido en un array.
+
+4. IndexOutOfBoundsException (IndexOutOfBoundsException): Es la clase base para excepciones de índice fuera de rango, como ArrayIndexOutOfBoundsException y StringIndexOutOfBoundsException.
+
+5. NumberFormatException (NumberFormatException): Se arroja cuando intentas convertir una cadena en un tipo numérico, pero la cadena no tiene el formato adecuado.
+
+6. ClassCastException (ClassCastException): Lanzada cuando intentas convertir un objeto a un tipo incompatible en tiempo de ejecución.
+
+7. IllegalArgumentException (IllegalArgumentException): Se arroja cuando se pasa un argumento ilegal o inapropiado a un método.
+
+8. FileNotFoundException (FileNotFoundException): Se arroja cuando se intenta acceder a un archivo que no se encuentra en el sistema.
+
+9. IOException (IOException): Es la clase base para excepciones de entrada/salida. Incluye situaciones como problemas en la lectura o escritura de archivos.
+
+10. RuntimeException (RuntimeException): Es la clase base para excepciones que generalmente están relacionadas con errores en la lógica del programa y pueden ser evitadas con un mejor diseño y manejo.
+
+```java
+public class ExceptionExample {
+    public static void main(String[] args) {
+        String[] numbers = {"10", "20", "30", "forty", "50"};
+        
+        try {
+            for (int i = 0; i <= numbers.length; i++) {
+                int parsedNumber = Integer.parseInt(numbers[i]);
+                System.out.println("Parsed number: " + parsedNumber);
+            }
+        } catch (NumberFormatException e1) {
+            System.out.println("NumberFormatException: Unable to parse a number.");
+        } catch (ArrayIndexOutOfBoundsException e2) {
+            System.out.println("ArrayIndexOutOfBoundsException: Index is out of range.");
+        } catch (NullPointerException e3) {
+            System.out.println("NullPointerException: Array reference is null.");
+        }
+        
+        System.out.println("Program completed.");
+    }
+}
+
+```
+
+
+
+# TDA: tipo de dato abstracto *(Abstract Data Type)*
+
+> **TDA:** es un tipo definido solamente en términos de sus operaciones y de las restricciones que valen entre las operaciones. *se definen en terminos de su representacion conceptual y sus operaciones*
+
+
+## Pila (Stack): 
+Colección lineal de objetos actualizada en un extremo llamado tope usando una política LIFO (last-in first-out, el primero en entrar es el último en salir, el ultimo que ingresa es el primero que sale).
+
+* Operaciones con **Pila**:
+  *  `push(e)`: Inserta el elemento e en el tope de la pila
+  * `pop()`: Elimina el elemento del tope de la pila y lo entrega como resultado. Si se aplica a una pila vacía, produce una situación de error.
+  * `isEmpty()`: Retorna verdadero si la pila no contiene elementos y falso en caso contrario.
+  * `top()`: Retorna el elemento del tope de la pila. Si se aplica a una pila vacía, produce una situación de error.
+  * `size()`: Retorna un entero natural que indica cuántos elementos hay en la pila.
+
+> Idea intuitiva de **pila**: Cada vez que se pone un elemento se pone al final y cada vez que se saca un elemento se saca del final.
+
+## Iplementacion de PILA:
+
+Definición de una interfaz Pila:
+* Se abstrae de la ED con la que se implementará
+* Se documenta el significado de cada método en lenguaje natural
+* Se usa un parámetro formal de tipo representando el tipo de los elementos de la pila
+* Se definen excepciones para las condiciones de error
+
+
+```mermaid
+ classDiagram
+    class Pila  {
+        <<abstract>>
+        +push( item : E )
+        +pop( ) : E
+        +top() : E
+        +isEmpty() : boolean
+        +size() : int
+    }
+```
+
+
+### Uso de la clase Pila brindada por JAVA
+
+```java
+
+import java.util.EptyStackException;
+
+public class main{
+    public static void main(String[] args){
+        Stack<String> miPila = new Stack();
+        miPila.push("Hola");
+        miPila.push("mundo")
+        miPila.push("Cruel")
+        //hasta ahí pusimos 3 elementos en la pila
+
+        //con peek muestra pero no elimina
+        if(miPila.peek() == "cruel"){
+            System.out.println("la pila funciona bien")
+        }else{
+            System.out.println("la pila funciona mal")
+        }
+        // salida : la pila funciona bien
+    }
+
+    //con pop muestra y elimina
+    System.out.println(miPila.pop())
+    if(miPila.peek() == "mundo"){
+            System.out.println("la pila funciona bien")
+        }else{
+            System.out.println("la pila funciona mal")
+        }
+        // salida : la pila funciona bien
+
+        try{
+            Stack<String> otraPIla = new Stack<>();
+            String resultado = otraPila.pop();
+        }
+        catch( EmptyStackException e){
+            System.out.println("Error: pila vacia")
+        }
+        //salida: Error: pila vacia
+}
+```
+
+# TDA Cola (Queque):
+
+>Una cola (queue) es una colección con modelo de secuencia cuyos datos ingresan por un extremo llamado rabo (tail) y salen por otro extremo llamado frente (head). el primero en ingresar es el primero en salir <-[1,2,3,4]<-
+
+## Operacion Cola:
+Esta política de actualización se llama FIFO (por first-in first-out) o también FCFS (first-come first-served)
+
+* enqueue(e): Inserta el elemento e en el rabo de la cola
+* dequeue(): Elimina el elemento del frente de la cola y lo
+retorna. Si la cola está vacía se produce un error.
+  * front(): Retorna el elemento del frente de la cola. Si la cola
+está vacía se produce un error.
+* isEmpty(): Retorna verdadero si la cola no tiene elementos
+y falso en caso contrario
+* size(): Retorna la cantidad de elementos de la cola.
+
+## Implementacion COLA:
+Definición de una interfaz Cola:
+* Se abstrae de la ED con la que se implementará
+* Se documenta el significado de cada método en lenguaje
+natural
+* Se usa un parámetro formal de tipo representando el tipo de
+los elementos de la cola
+* Se definen excepciones para las condiciones de error
+
+```java
+public intreface Queue<E>{
+    public void enqueue();
+    public void dequeue();
+    **completar**
+}
+
+```
+
+### Ejemplo de uso COLA: (usando las clases que implementa la interfaz).
+```java
+public class main{
+    public static void main(String[] args){
+        Queue<String> miQueue = new LinkedList<String>();
+        //estatico del tipo interfaz Queue del tipo dinamico LinkedList. 
+        //todos los metodos especificados e implementados por java
+
+        miQueue.add("Hola");
+        miQueue.add("mundo")
+        miQueue.add("Cruel")
+        //hasta ahí pusimos 3 elementos en la cola
+
+        //con peek muestra pero no elimina
+        if(miQueue.peek() == "Hola"){
+            System.out.println("la Queue funciona bien");
+        }else{
+            System.out.println("la Queue funciona mal");
+        }
+        // salida : la Queue funciona bien, la diferencia es que preguntamos por la primera add 
+    }
+
+    //con pop muestra y elimina
+    System.out.println(miQueue.dequeue());
+    if(miQueue.peek() == "mundo"){
+            System.out.println("la Queue funciona bien");
+        }else{
+            System.out.println("la Queue funciona mal");
+        }
+        // salida : la Queue funciona bien
+
+        try{
+            Stack<String> otraQueue = new Stack<>();
+            String resultado = otraQueue.pop();
+        }
+        catch( EmptyStackException e){
+            System.out.println("Error: Queue vacia");
+        }
+        //salida: Error: Queue vacia
+    }
+}
+
+```
+# Integracion PILA y COLA (operaciones de TDA)
+
+> se podria pensar en un simple problema: dada una Cola A [3,7,9,1]
+> convertirla en una Cola [1,9,7,3].
+
+usando como una herramienta auxiliar una pila podemos solucionar este problema 
+
+```java
+public class main{
+    public static void main(String[] args){
+        Queue<String> miQueue = new LinkedList<String>();
+
+
+    public static void invertir(Queue<String> e){
+        Stack<String> pilaAuxiliar =  new Stack<>();
+
+        while (!e.isEmpty()){
+            String elem = e.remove();
+            pilaAuxiliar.add(elem);
+        }
+        
+        while (!pilaAuxiliar.isEmpty()){
+            String elem = pilaAuxiliar.pop();
+            e.add(elem);
+        }
+    }
+    }
+}
+
+```
+## invertir una fila
+> se podria pensar en un simple problema: dada una fila A [3,7,9,1]
+> convertirla en una fila [1,9,7,3].
+
+usando como una herramienta auxiliar una cola podemos solucionar este problema 
+
+```java
+public class main{
+    public static void main(String[] args){
+        Stack<String> pila = new Stack<String>();
+
+
+    public static void invertir(Queue<String> e){
+        Queue<String> colaAuxiliar =  new LinkedList<>();
+
+        while (!e.isEmpty()){
+            String elem = e.pop();
+            colaAuxiliar.add(elem);
+        }
+
+        while (!colaAuxiliar.isEmpty()){
+            String elem = colaAuxiliar.remove();
+            e.add(elem);
+        }
+        
+        
+    }
+    }
+}
+
 ```

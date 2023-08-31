@@ -7,9 +7,8 @@ public interface Conjunto<E> {
 	public E get(int i); // 
 	public void put(E elem); 
 	public boolean pertenece(E elem);
-	Conjunto<E> intersección(Conjunto<E> otroConjunto);
-	
-	//ejemplo en clase 24/8
-	/*
-	public void add(E elementos);*/
+	Conjunto<E> interseccion(Conjunto<E> otroConjunto);
+	public void delete(int i);
+	public String toString();
+	public boolean perteneceRecursivo(E e);
 }
