@@ -25,6 +25,21 @@ public class main{
     	
     	
     	Queue<Integer> miQueue = new LinkedList<>();
+    	miQueue.add(1);
+    	miQueue.add(2);
+    	miQueue.add(3);
+    	miQueue.add(4);
+    	
+    	System.out.println(miQueue.size());
+
+    	System.out.println(miQueue.peek());
+    	
+    	// 
+    	Queue<Integer> nuevaColaImpares = colaImpares(miQueue);
+    	System.out.println(nuevaColaImpares.size());
+
+    	System.out.println(nuevaColaImpares.peek());
+    	
     }
     	
     public static void invertir(Persona[] e) {
@@ -41,17 +56,36 @@ public class main{
     		e[cont++] = pilaAux.pop();
         }  
     }
-    public static void colaImpares(LinkedList<Integer> e) {
+    public static Queue<Integer> colaImpares(Queue<Integer> miQueue) { 
+    	Queue<Integer> aux = new LinkedList<>();
+        while (!miQueue.isEmpty()) {
+        	if(miQueue.peek()%2 != 0){
+            	 aux.add(miQueue.poll());
+        	}else {
+        		miQueue.remove();
+        	}
+        }
+        while (!aux.isEmpty()) {
+        	miQueue.add(aux.poll());
+        }
+        return miQueue;
+    }
+    /*
+    Implemente un método tal que reciba por parámetro dos pilas genéricas p1 y p2 y retorne una nueva pila producto
+	de intercalar el contenido de las pilas p1 y p2. Tenga en cuenta que luego de ejecutarse este método ambas pilas
+	quedarán vacías. Las pilas pueden tener distintos tamaños.
+     */
+    public static <E> Stack<E> pilasIntercaladas(Stack<E> p1, Stack<E> p2) { 
+    	Stack<E> aux = new Stack<E>();
     	
-		Queue<Integer> aux = new LinkedList<>();
-        while (!e.isEmpty() && e. %2 != 0 ){
-            
-            colaAuxiliar.add(elem);
-        }
-
-        while (!colaAuxiliar.isEmpty()){
-            String elem = colaAuxiliar.remove();
-            e.add(elem);
-        }
-   }
+        while (!p1.isEmpty() || !p2.isEmpty()) {
+        	if(!p1.isEmpty()){
+            	 aux.add(p1.pop());
+        	}
+        	if(!p2.isEmpty()){
+        		aux.add(p2.pop());
+       	}
+        
+        return aux;
+    }
 }
