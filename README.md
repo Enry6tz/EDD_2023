@@ -527,3 +527,27 @@ public class main{
 }
 
 ```
+
+- - -
+* En resumen una pila y una cola deberia tener una estructura basico con los siguientes metodos
+
+pila | cola | obs
+ | - | -| -|
+Apilar(a) | encolar(a) | agrega elemento
+desapilar(): elemento | sacar(): elemento |saca y elimina
+tope(): elemento   | frente(): elemento | solo muestra sin eliminar 
+estaVacia(): boolean | estaVacia(): boolean | 
+crearPila() | crearCola() | stack o linkedlist
+tamaño(): int  |   tamaño (): int |
+
+extepciones con metodos implementados
+`public E peek thows NoSuchElement{}`
+
+### implementacion del TDA PILA en funcion de TDA COLA
+
+
+```java
+
+```
+
+# TDA Lista
