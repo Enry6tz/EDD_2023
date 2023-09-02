@@ -84,8 +84,8 @@ public class main{
         	}
         	if(!p2.isEmpty()){
         		aux.add(p2.pop());
-       	}
-        
+        	}
+        }
         return aux;
     }
 }
