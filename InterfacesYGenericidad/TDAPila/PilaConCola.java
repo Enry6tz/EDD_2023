@@ -25,6 +25,7 @@ public class PilaConCola<E> implements Stack<E>{
 		 if (isEmpty()) {
 		        throw new EmptyStackException();
 		    }
+<<<<<<< HEAD:InterfacesYGenericidad/src/TDAPila/PilaConCola.java
 		if(size()>1)
 			for(int i=0; i<size()-1; i++) {//girando la cola y modificando su estado interno 
 					pilaLinked.add(pilaLinked.poll());
@@ -35,11 +36,27 @@ public class PilaConCola<E> implements Stack<E>{
 	}
 	
 	
+=======
+		girar();
+		return pilaLinked.peek();
+	}
+	
+	private void girar() {
+		if(size()>0)
+		for(int i=0; i<size()-1; i++) {//girando la cola y modificando su estado interno 
+			pilaLinked.add(pilaLinked.poll());
+		}
+	}
+>>>>>>> 68ffd3dbc4d8bb920914803a89b63a2abb1f06ec:InterfacesYGenericidad/TDAPila/PilaConCola.java
 	
 	@Override
 	public void push(E element) {
 		pilaLinked.add( element);
+<<<<<<< HEAD:InterfacesYGenericidad/src/TDAPila/PilaConCola.java
 		
+=======
+		girar();
+>>>>>>> 68ffd3dbc4d8bb920914803a89b63a2abb1f06ec:InterfacesYGenericidad/TDAPila/PilaConCola.java
 	}
 
 	@Override
@@ -47,12 +64,16 @@ public class PilaConCola<E> implements Stack<E>{
 		if (isEmpty()) {
 	        throw new EmptyStackException();
 	    }
+<<<<<<< HEAD:InterfacesYGenericidad/src/TDAPila/PilaConCola.java
 		if(size()>1)
 			for(int i=0; i<size()-1; i++) {//girando la cola y modificando su estado interno 
 						pilaLinked.add(pilaLinked.poll());
 				}
 			
 			return  pilaLinked.poll();
+=======
+		return pilaLinked.poll();
+>>>>>>> 68ffd3dbc4d8bb920914803a89b63a2abb1f06ec:InterfacesYGenericidad/TDAPila/PilaConCola.java
 	}
 
 }
