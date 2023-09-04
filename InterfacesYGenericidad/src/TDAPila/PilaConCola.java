@@ -22,29 +22,37 @@ public class PilaConCola<E> implements Stack<E>{
 
 	@Override
 	public E top() throws EmptyStackException {
-		
 		 if (isEmpty()) {
 		        throw new EmptyStackException();
 		    }
-		for(int i=0; i<size()-1; i++) {
-			pilaLinked.add(pilaLinked.poll());
-		}
-		return pilaLinked.peek();
+		if(size()>1)
+			for(int i=0; i<size()-1; i++) {//girando la cola y modificando su estado interno 
+					pilaLinked.add(pilaLinked.poll());
+			}
+		E aux =  pilaLinked.peek();
+		pilaLinked.add(pilaLinked.poll());
+		return aux;
 	}
-	//girando la cola y modificando su estado interno 
+	
+	
+	
 	@Override
 	public void push(E element) {
-		try {
-			
-			
-		} catch (EmptyStackException e) {
-			e.printStackTrace();
-		}
+		pilaLinked.add( element);
+		
 	}
 
 	@Override
 	public E pop() throws EmptyStackException {
-		return null;
+		if (isEmpty()) {
+	        throw new EmptyStackException();
+	    }
+		if(size()>1)
+			for(int i=0; i<size()-1; i++) {//girando la cola y modificando su estado interno 
+						pilaLinked.add(pilaLinked.poll());
+				}
+			
+			return  pilaLinked.poll();
 	}
 
 }

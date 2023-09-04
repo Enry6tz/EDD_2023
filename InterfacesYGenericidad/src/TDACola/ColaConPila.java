@@ -24,20 +24,52 @@ public class ColaConPila<E> implements Queue<E>{
 
 	@Override
 	public E front() throws EmptyQueueException {
-		// TODO Auto-generated method stub
-		return null;
+	    Stack<E> auxStack = new Stack<>(); 
+
+	    if (isEmpty()) {
+	        throw new EmptyQueueException();
+	    }
+	    
+	    int size = colaStack.size(); 
+	    
+	  
+	    for (int i = 0; i < size - 1; i++) {
+	        auxStack.push(colaStack.pop());
+	    }
+	    
+	    E res = colaStack.peek(); 
+	    for (int i = 0; i < size - 1; i++) {
+	        colaStack.push(auxStack.pop());
+	    }
+	    return res;
 	}
 
 	@Override
 	public void enqueue(E element) {
-		// TODO Auto-generated method stub
+		colaStack.push(element);
 		
 	}
 
 	@Override
 	public E dequeue() throws EmptyQueueException {
-		// TODO Auto-generated method stub
-		return null;
+		Stack<E> auxStack = new Stack<>(); 
+
+		if (isEmpty()) {
+			throw new EmptyQueueException();
+		 }
+		    
+		    int size = colaStack.size(); 
+		    
+		  
+		    for (int i = 0; i < size - 1; i++) {
+		        auxStack.push(colaStack.pop());
+		    }
+		    
+		    E res = colaStack.pop(); 
+		    for (int i = 0; i < size - 1; i++) {
+		        colaStack.push(auxStack.pop());
+		    }
+		    return res;
 	}
 	
 }
